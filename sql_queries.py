@@ -2,27 +2,32 @@
 #
 #   Author: Virgil Hoover
 #   License found in './License.txt'
+from datetime import datetime
 
 
 def network_select_query():
     sql_query = 'SELECT network.SiteID, network.Node, requests.Name, network.State, network.DateRcvd FROM network ' \
-                'INNER JOIN requests ON network.RequestType = requests.ID WHERE LastAttempt IS NOT NULL'
+                'INNER JOIN requests ON network.RequestType = requests.ID WHERE DateEntered IS NULL'
     return sql_query
 
 
 def update_network_query():
-    sql_query = 'UPDATE network Set LastAttempt = CURDATE() WHERE LastAttempt IS NOT NULL'
+    date_stamp = datetime.today()
+    cur_date = date_stamp.strftime('%Y-%m-%d')
+    sql_query = f'UPDATE network Set LastAttempt = {cur_date} WHERE LastAttempt IS NOT NULL'
     return sql_query
 
 
 def update_server_query():
-    sql_query = 'UPDATE server Set LastAttempt = CURDATE() WHERE LastAttempt IS NOT NULL'
+    date_stamp = datetime.today()
+    cur_date = date_stamp.strftime('%Y-%m-%d')
+    sql_query = f'UPDATE server Set LastAttempt = {cur_date} WHERE LastAttempt IS NOT NULL'
     return sql_query
 
 
 def select_server_query():
     sql_query = 'SELECT server.HostName, server.Address, requests.Name, server.DateRcvd FROM server INNER ' \
-                'JOIN requests ON server.RequestType = requests.ID WHERE LastAttempt IS NOT NULL'
+                'JOIN requests ON server.RequestType = requests.ID WHERE DateEntered IS NULL'
     return sql_query
 
 
