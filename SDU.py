@@ -449,7 +449,7 @@ def email():
     """ Contact the creator. """
     exists = getenv('UserProfile') + '\\ApppData\\Local\\Microsoft\\Outlook\\*.ost'
     if exists:
-        open_new(r'mailto:ml-fssnoc@fmc-na.com')
+        open_new(r'mailto:fssnoc@exampl.com')
     else:
         open_new('https://mail.office365.com/')
     return
